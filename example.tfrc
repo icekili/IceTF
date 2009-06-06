@@ -1,0 +1,21 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Personal settings, preferences, keybindings, etc.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+/log off
+/visual off
+
+/set LC_CTYPE=fi_FI.iso88591
+
+/load kb-bash.tf
+
+/def -i iloadmod = /eval /load %{HOME}/icesus/IceTF/%{*}
+
+/iloadmod icetf-party.tf
+/iloadmod icetf-prots.tf
+
+;; Logging on
+/def -F -h'CONNECT Icesus' start_log_at_connect = \
+	/eval /log -g %HOME/icesus/logs/$(/time %%Y-%%m-%%d)-A.log%;\
+	/eval /log -i %HOME/icesus/logs/$(/time %%Y-%%m-%%d)-A.log
+
+/addworld -Tlp Icesus 83.150.67.106 23
