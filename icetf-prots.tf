@@ -108,9 +108,11 @@
 ;;; Priest of Water
 ;;;
 
-;; Thirst for knowledge
-;; UP:
-;;   You feel sudden thirst for new knowledge and feel a bit wiser.
+/idefprot \
+    -n"Thirst for knowledge" \
+    -s"ToK" \
+    -u"^You feel sudden thirst for new knowledge and feel a bit wiser." \
+    -d"^You don't feel so interested about new things anymore."
 
 /idefprot \
     -n"Embrace of the rimewind" \
