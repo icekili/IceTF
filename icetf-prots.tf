@@ -15,7 +15,6 @@
 /set iprots_party_report=1
 
 
-
 ;; idefprot - Define Protection / Boost
 ;;
 ; /idefprot arguments:
@@ -41,7 +40,7 @@
     /endif %; \
     /eval /def -F -mregexp -t"%{opt_u}" %{trig_name}_up = \
         /substitute -p @{Cgreen}%%%{P0}@{n} (@{Cbrightblue}%{long_name} UP@{n}) %%%; \
-        /set %{trig_name}_timer $[time()] %%%; \
+        /set %{trig_name}_timer $$$[time()] %%%; \
         /if (iprots_party_report & iparty_enabled) \
             @party report %{long_name} UP %%%; \
         /endif %; \
