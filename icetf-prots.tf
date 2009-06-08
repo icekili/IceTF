@@ -68,22 +68,24 @@
 ;;;
 
 ;; Life Boost
-/idefprot -n"Life boost" \
-          -s"LB" \
-          -u"^You feel much safer." \
-          -d"^The life boost fades, making you feel threatened."
+/idefprot \
+    -n"Life boost" \
+    -s"LB" \
+    -u"^You feel much safer." \
+    -d"^The life boost fades, making you feel threatened."
 
 ;;;
 ;;; Teaching of Elements
 ;;;
 
 ;; Aspect of Elements (maybe also Floating effect with air?)
-/idefprot -n"Aspect of elements" \
-          -s"AoE" \
-          -i"air" \
-          -u"^You open your mouth and utter 'Adefyv Peiadc' with sound of an immense thunderstorm and instantly after that your mortal form turns into an aspect of air elemental!" \
-          -d"^You turn back into your normal form." \
-          -r"^You replenish elemental aspect."
+/idefprot \
+    -n"Aspect of elements" \
+    -s"AoE" \
+    -i"air" \
+    -u"^You open your mouth and utter 'Adefyv Peiadc' with sound of an immense thunderstorm and instantly after that your mortal form turns into an aspect of air elemental!" \
+    -d"^You turn back into your normal form." \
+    -r"^You replenish elemental aspect."
 
 /idefprot \
     -n"Gift of elements" \
@@ -96,12 +98,19 @@
 ;;; Sorcerer
 ;;;
 
-;; Sphere of Protection
-/idefprot -n"Sphere of protection" \
-	  -s"SoP" \
-	  -u"^A smoky, red-hued sphere of protection surrounds you." \
-	  -d"^The sphere of protection around your body fades away."
+/idefprot \
+    -n"Sphere of protection" \
+    -s"SoP" \
+    -u"^A smoky, red-hued sphere of protection surrounds you." \
+    -d"^The sphere of protection around your body fades away."
 
+;; PRE: Dracu makes a circling motion with the scepter and intones 'racheace che hazor'.
+/idefprot \
+    -n"Sphere of warding" \
+    -s"SoW" \
+    -u"^A crystal-clear sphere of warding surrounds you." \
+    -d"^The sphere of warding around you fades away." \
+    -r"^Your sphere of warding glimmers a second as Dracu replenishes it."
 
 ;;;
 ;;; Priest of Water
@@ -126,14 +135,6 @@
 
 ;; Spectral claws
 ;; Pre: You touch yourself.
-;; UP:
-;;   Suddenly the air around your claws turns extremely chilly!
-;;   Suddenly your claws burst into fire!
-;;   Suddenly your claws start to crackle as lightning field surrounds them!
-;;   Suddenly corrosive acid starts dripping from your claws!
-;; DOWN:
-;;   Your claws turn normal as your spell ends.
-
 /idefprot \
     -n"Spectral claws" \
     -s"SC" \
@@ -165,10 +166,11 @@
 
 ;; Senses of a Beast
 ;; Pre: You touch yourself.
-;; UP:
-;;   Suddenly your vision flashes for a second but then returns to normal.
-;; DOWN:
-;;   Your eyes tickle for a second and you notice that your abnormal senses are gone.
+/idefprot \
+    -n"Senses of a beast" \
+    -s"SoB" \
+    -u"^Suddenly your vision flashes for a second but then returns to normal." \
+    -d"^Your eyes tickle for a second and you notice that your abnormal senses are gone."
 
 
 ;; Hide of a beast
