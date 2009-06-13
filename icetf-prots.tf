@@ -74,6 +74,7 @@
     -u"^You feel much safer." \
     -d"^The life boost fades, making you feel threatened."
 
+
 ;;;
 ;;; Teaching of Elements
 ;;;
@@ -94,6 +95,7 @@
     -u"^The essence of Pthuule fills your spirit and you feel gifted by the elements." \
     -d"^You feel a loss as gift of elements ceases to affect you."
 
+
 ;;;
 ;;; Sorcerer
 ;;;
@@ -111,6 +113,7 @@
     -u"^A crystal-clear sphere of warding surrounds you." \
     -d"^The sphere of warding around you fades away." \
     -r"^Your sphere of warding glimmers a second as Dracu replenishes it."
+
 
 ;;;
 ;;; Priest of Water
@@ -162,7 +165,6 @@
     -i"acid" \
     -u"^Suddenly corrosive acid starts dripping from your claws!" \
     -d"^Your claws turn normal as your spell ends."
-
 
 ;; Senses of a Beast
 ;; Pre: You touch yourself.
