@@ -232,6 +232,12 @@
     -u"^The air around you waves and ripples, blurring everything in your sight as an inertia bubble forms around you." \
     -d"^The inertia bubble around you dissolves."
 
+/idefprot \
+    -n"Shadow barrier" \
+    -s"SB" \
+    -u"^As [A-Z][a-z]+ finishes the chant, shadows jump from the darkness forming a barrier around you!" \
+    -d"^The shadow barrier around you fades into nothingness."
+
 
 ;; FIXME: Unfold mind
 ;; UP:
