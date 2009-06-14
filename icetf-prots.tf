@@ -77,7 +77,7 @@
 /idefprot \
     -n"Life boost" \
     -s"LB" \
-    -u"^You feel much safer." \
+    -u"^You feel (much |)safer." \
     -d"^The life boost fades, making you feel threatened."
 
 
