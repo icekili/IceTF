@@ -5,6 +5,7 @@
 ;; Module for tracking boosts, protections, etc.etc. for current player.
 ;;
 ;; This module requires the following modules:
+;;   - icetf.tf
 ;;   - icetf-party.tf
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -13,7 +14,6 @@
 
 ;; Report prot Up/Down in party report channel
 /set iprots_party_report=1
-
 
 ;; idefprot - Define Protection / Boost
 ;;
@@ -41,22 +41,28 @@
     /eval /def -F -mregexp -t"%{opt_u}" %{trig_name}_up = \
         /substitute -p @{Cgreen}%%%{P0}@{n} (@{Cbrightblue}%{long_name} UP@{n}) %%%; \
         /set %{trig_name}_timer $$$[time()] %%%; \
-        /if (iprots_party_report & iparty_enabled) \
+        /if (iprots_party_report & istatus_party) \
             @party report %{long_name} UP %%%; \
         /endif %; \
     /eval /def -F -mregexp -t"%{opt_d}" %{trig_name}_down = \
         /if (%{trig_name}_timer =~ "") /break %%%; /endif %%%; \
         /substitute -p @{Cgreen}%%%{P0}@{n} (@{Cbrightblue}%{long_name} DOWN@{n}) %%%; \
-        /if (iprots_party_report & iparty_enabled) \
+        /if (iprots_party_report & istatus_party) \
             @party report %{long_name} DOWN %%%; \
         /endif %%%; \
         /unset %{trig_name}_timer %; \
+    /eval /def -F -mregexp -t"^ %{opt_n}" %{trig_name}_score_e = \
+        /if (%{trig_name}_timer =~ "") \
+            /set %{trig_name}_timer $$$[time()] %%%; \
+        /else \
+            /substitute -p %%%{P0} %%%; \
+        /endif %; \
     /if (opt_r !~ "") \
         /eval /def -F -mregexp -t"%{opt_r}" %{trig_name}_recharge = \
             /if (%{trig_name}_timer =~ "") /break %%%; /endif %%%; \
             /substitute -p @{Cgreen}%%%{P0}@{n} (@{Cbrightblue}%{long_name} RECHARGED@{n}) %%%; \
-            /set %{trig_name}_timer $[time()] %%%; \
-            /if (iprots_party_report & iparty_enabled) \
+            /set %{trig_name}_timer $$$[time()] %%%; \
+            /if (iprots_party_report & istatus_party) \
                 @party report %{long_name} recharged %%%; \
             /endif %; \
     /endif

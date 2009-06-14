@@ -10,6 +10,7 @@
 
 /def -i iloadmod = /eval /load %{HOME}/icesus/IceTF/%{*}
 
+/iloadmod icetf.tf
 /iloadmod icetf-party.tf
 /iloadmod icetf-prots.tf
 
