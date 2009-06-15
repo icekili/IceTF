@@ -12,7 +12,7 @@
 
 /iloadmod icetf.tf
 /iloadmod icetf-party.tf
-/iloadmod icetf-prots.tf
+/iloadmod icetf-effects.tf
 
 ;; Logging on
 /def -F -h'CONNECT Icesus' start_log_at_connect = \

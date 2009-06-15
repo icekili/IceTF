@@ -1,8 +1,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; IceTF - Prots module. (c) Kili @Icesus, 2009.
+;; IceTF - Special Effects module. (c) Kili @Icesus, 2009.
 ;;
-;; Module for tracking boosts, protections, etc.etc. for current player.
+;; Module for tracking special effects for current player. This module
+;; should contain everything which can be seen with "score -e" command.
 ;;
 ;; This module requires the following modules:
 ;;   - icetf.tf
@@ -10,44 +11,45 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-/loaded IceTF::Prots
+/loaded IceTF::Effects
 
-;; Report prot Up/Down in party report channel
-/set iprots_party_report=1
+;; Report effect Up/Down in party report channel
+/set ieffects_party_report=1
 
-;; idefprot - Define Protection / Boost
+
+;; idefeffect - Effect
 ;;
-; /idefprot arguments:
-;     -n"<text>" = Long name of boost, the one shown in "score -e" command
-;     -s"<text>" = Short name of boost, use known short nickname or something unique derived from name
-;     -i"<text>" = Identifier of boost to distinct between different variations of boost
-;     -u"<text>" = Line of the boost up message (regexp)
-;     -d"<text>" = Line of the boost down message (regexp)
-;     -r"<text>" = Line of the boost recharge/replenish message (regexp)
+; /idefeffect arguments:
+;     -n"<text>" = Long name of effect, the one shown in "score -e" command
+;     -s"<text>" = Short name of effect, use known short nickname or something unique derived from name
+;     -i"<text>" = Identifier of effect to distinct between different variations of effect
+;     -u"<text>" = Line of the effect up message (regexp)
+;     -d"<text>" = Line of the effect down message (regexp)
+;     -r"<text>" = Line of the effect recharge/replenish message (regexp)
 
-/def idefprot = \
+/def idefeffect = \
     /if (!getopts("n:s:i:u:d:r:", "")) /return 0 %; /endif %; \
-    /if (opt_n =~ "") /echo IceTF: Error in idefprot: Missing long name (-n) %; /break %; /endif %; \
-    /if (opt_s =~ "") /echo IceTF: Error in idefprot: Definition "%{opt_n}" missing short name (-s) %; /break %; /endif %; \
-    /if (opt_u =~ "") /echo IceTF: Error in idefprot: Definition "%{opt_n}" missing up message (-u) %; /break %; /endif %; \
-    /if (opt_d =~ "") /echo IceTF: Error in idefprot: Definition "%{opt_n}" missing down message (-d) %; /break %; /endif %; \
+    /if (opt_n =~ "") /echo IceTF: Error in idefeffect: Missing long name (-n) %; /break %; /endif %; \
+    /if (opt_s =~ "") /echo IceTF: Error in idefeffect: Definition "%{opt_n}" missing short name (-s) %; /break %; /endif %; \
+    /if (opt_u =~ "") /echo IceTF: Error in idefeffect: Definition "%{opt_n}" missing up message (-u) %; /break %; /endif %; \
+    /if (opt_d =~ "") /echo IceTF: Error in idefeffect: Definition "%{opt_n}" missing down message (-d) %; /break %; /endif %; \
     /if (opt_i !~ "") \
         /let long_name %{opt_n} (%{opt_i}) %; \
-        /let trig_name iprot_%{opt_s}_%{opt_i} %; \
+        /let trig_name ieffect_%{opt_s}_%{opt_i} %; \
     /else \
         /let long_name %{opt_n} %; \
-        /let trig_name iprot_%{opt_s} %; \
+        /let trig_name ieffect_%{opt_s} %; \
     /endif %; \
     /eval /def -F -mregexp -t"%{opt_u}" %{trig_name}_up = \
         /substitute -p @{Cgreen}%%%{P0}@{n} (@{Cbrightblue}%{long_name} UP@{n}) %%%; \
         /set %{trig_name}_timer $$$[time()] %%%; \
-        /if (iprots_party_report & istatus_party) \
+        /if (ieffects_party_report & istatus_party) \
             @party report %{long_name} UP %%%; \
         /endif %; \
     /eval /def -F -mregexp -t"%{opt_d}" %{trig_name}_down = \
         /if (%{trig_name}_timer =~ "") /break %%%; /endif %%%; \
         /substitute -p @{Cgreen}%%%{P0}@{n} (@{Cbrightblue}%{long_name} DOWN@{n}) %%%; \
-        /if (iprots_party_report & istatus_party) \
+        /if (ieffects_party_report & istatus_party) \
             @party report %{long_name} DOWN %%%; \
         /endif %%%; \
         /unset %{trig_name}_timer %; \
@@ -55,18 +57,17 @@
         /if (%{trig_name}_timer =~ "") \
             /set %{trig_name}_timer $$$[time()] %%%; \
         /else \
-            /substitute -p %%%{P0} %%%; \
+            /test substitute("%%%{P0}", "", 1) %%%; \
         /endif %; \
     /if (opt_r !~ "") \
         /eval /def -F -mregexp -t"%{opt_r}" %{trig_name}_recharge = \
             /if (%{trig_name}_timer =~ "") /break %%%; /endif %%%; \
             /substitute -p @{Cgreen}%%%{P0}@{n} (@{Cbrightblue}%{long_name} RECHARGED@{n}) %%%; \
             /set %{trig_name}_timer $$$[time()] %%%; \
-            /if (iprots_party_report & istatus_party) \
+            /if (ieffects_party_report & istatus_party) \
                 @party report %{long_name} recharged %%%; \
             /endif %; \
     /endif
-
 
 
 ;;;
@@ -74,7 +75,7 @@
 ;;;
 
 ;; Life Boost
-/idefprot \
+/idefeffect \
     -n"Life boost" \
     -s"LB" \
     -u"^You feel (much |)safer." \
@@ -86,7 +87,7 @@
 ;;;
 
 ;; Aspect of Elements (maybe also Floating effect with air?)
-/idefprot \
+/idefeffect \
     -n"Aspect of elements" \
     -s"AoE" \
     -i"air" \
@@ -94,7 +95,7 @@
     -d"^You turn back into your normal form." \
     -r"^You replenish elemental aspect."
 
-/idefprot \
+/idefeffect \
     -n"Gift of elements" \
     -s"GoE" \
     -i"air" \
@@ -106,14 +107,14 @@
 ;;; Sorcerer
 ;;;
 
-/idefprot \
+/idefeffect \
     -n"Sphere of protection" \
     -s"SoP" \
     -u"^A smoky, red-hued sphere of protection surrounds you." \
     -d"^The sphere of protection around your body fades away."
 
 ;; PRE: Dracu makes a circling motion with the scepter and intones 'racheace che hazor'.
-/idefprot \
+/idefeffect \
     -n"Sphere of warding" \
     -s"SoW" \
     -u"^A crystal-clear sphere of warding surrounds you." \
@@ -125,13 +126,13 @@
 ;;; Priest of Water
 ;;;
 
-/idefprot \
+/idefeffect \
     -n"Thirst for knowledge" \
     -s"ToK" \
     -u"^You feel sudden thirst for new knowledge and feel a bit wiser." \
     -d"^You don't feel so interested about new things anymore."
 
-/idefprot \
+/idefeffect \
     -n"Embrace of the rimewind" \
     -s"RW" \
     -u"^Massive glacial gales heed your call and start to blow all around you, forming a deadly yet beautiful whirlwind of rime and snow capable of freezing and killing anything living passing too close to you." \
@@ -144,28 +145,28 @@
 
 ;; Spectral claws
 ;; Pre: You touch yourself.
-/idefprot \
+/idefeffect \
     -n"Spectral claws" \
     -s"SC" \
     -i"cold" \
     -u"^Suddenly the air around your claws turns extremely chilly!" \
     -d"^Your claws turn normal as your spell ends."
 
-/idefprot \
+/idefeffect \
     -n"Spectral claws" \
     -s"SC" \
     -i"fire" \
     -u"^Suddenly your claws burst into fire!" \
     -d"^Your claws turn normal as your spell ends."
 
-/idefprot \
+/idefeffect \
     -n"Spectral claws" \
     -s"SC" \
     -i"lightning" \
     -u"^Suddenly your claws start to crackle as lightning field surrounds them!" \
     -d"^Your claws turn normal as your spell ends."
 
-/idefprot \
+/idefeffect \
     -n"Spectral claws" \
     -s"SC" \
     -i"acid" \
@@ -174,7 +175,7 @@
 
 ;; Senses of a Beast
 ;; Pre: You touch yourself.
-/idefprot \
+/idefeffect \
     -n"Senses of a beast" \
     -s"SoB" \
     -u"^Suddenly your vision flashes for a second but then returns to normal." \
@@ -217,13 +218,13 @@
 ;; Pre:
 ;;   Lume rubs her tentacles together and points them towards you singing 'tm zt'ag sloo'!
 
-/idefprot \
+/idefeffect \
     -n"Haste" \
     -s"Haste" \
     -u"^[A-Z][a-z]+ creates a subdimensional rift around you, speeding up the universe inside it." \
     -d"^You feel slower as the strange subdimensional rift disappears."
 
-/idefprot \
+/idefeffect \
     -n"Slow" \
     -s"Slow" \
     -u"^[A-Z][a-z]+ creates a subdimensional rift around you, slowing the universe inside it." \
@@ -234,13 +235,13 @@
 ;;; Unknown guild
 ;;;
 
-/idefprot \
+/idefeffect \
     -n"Inertia bubble" \
     -s"IB" \
     -u"^The air around you waves and ripples, blurring everything in your sight as an inertia bubble forms around you." \
     -d"^The inertia bubble around you dissolves."
 
-/idefprot \
+/idefeffect \
     -n"Shadow barrier" \
     -s"SB" \
     -u"^As [A-Z][a-z]+ finishes the chant, shadows jump from the darkness forming a barrier around you!" \
@@ -251,3 +252,8 @@
 ;; UP:
 ;;   You feel Ilmaree's presence inside your mind, while he unfolds the unused parts of your mind and opens the untapped resources for your use.
 
+
+;;;
+;;; No effects
+;;;
+;; From score -e: No visible effects affect you.
