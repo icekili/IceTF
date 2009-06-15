@@ -1,0 +1,1 @@
+/def -P1Cgreen -mregexp -t"^.{15,15} (You notice [a-z -]+ here.)" icetf_herbs
