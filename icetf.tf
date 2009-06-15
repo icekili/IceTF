@@ -31,7 +31,7 @@
 ;; Magical weakness. 0=no, 1=yes
 /set istatus_mweakness 0
 
-;; Casting a spell. 0=0, 1=yes
+;; Casting a spell. 0=no, 1=yes
 /set istatus_casting 0
 
 
@@ -117,4 +117,8 @@
 
 ;; Casting done
 /def -F -t"You are prepared to release the spell." icasting_off = \
+    /set istatus_casting=0
+
+;; Casting off because movement
+/def -F -t"Your movement forces you to stop concentrating on the spell." icasting_off2 = \
     /set istatus_casting=0
