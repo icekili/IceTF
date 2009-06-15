@@ -31,7 +31,7 @@
 ;; Magical weakness. 0=no, 1=yes
 /set istatus_mweakness 0
 
-;; Casting a spell. 0=0, 1=yes
+;; Casting a spell. 0=no, 1=yes
 /set istatus_casting 0
 
 
@@ -50,7 +50,7 @@
     /set istatus_sleep=1
 
 ;; Sleep DOWN
-/def -F -t"You wake up, feeling healed and very refreshed." isleep_off = \
+/def -F -mregexp -t"^You wake up, feeling healed and (very |)refreshed." isleep_off = \
     /set istatus_sleep=0
 
 /def -F -t"You aren't tired enough." isleep_not_tired = \
@@ -80,6 +80,11 @@
 ;; Stun UP
 /def -F -t"You get STUNNED from massive pain." istun_on = \
     /set istatus_stun=1
+
+;; Stun UP, Casting DOWN
+/def -F -t"You are unable to cast any spells while stunned." istun_on_casting_off = \
+    /set istatus_stun=1 %; \
+    /set istatus_casting=0
 
 ;; Stun DOWN
 /def -F -t"You feel better as your head stops spinning." istun_off = \
@@ -117,4 +122,8 @@
 
 ;; Casting done
 /def -F -t"You are prepared to release the spell." icasting_off = \
+    /set istatus_casting=0
+
+;; Casting off because movement
+/def -F -t"Your movement forces you to stop concentrating on the spell." icasting_off2 = \
     /set istatus_casting=0
