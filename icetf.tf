@@ -127,3 +127,6 @@
 ;; Casting off because movement
 /def -F -t"Your movement forces you to stop concentrating on the spell." icasting_off2 = \
     /set istatus_casting=0
+
+/def -F -t"You lost your concentration on your spell!" icasting_off3 = \
+    /set istatus_casting=0
