@@ -119,7 +119,7 @@
     -s"SoW" \
     -u"^A crystal-clear sphere of warding surrounds you." \
     -d"^The sphere of warding around you fades away." \
-    -r"^Your sphere of warding glimmers a second as Dracu replenishes it."
+    -r"^Your sphere of warding glimmers a second as [A-Z][a-z]+ replenishes it."
 
 
 ;;;
