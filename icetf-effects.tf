@@ -232,6 +232,17 @@
 
 
 ;;;
+;;; Templars
+;;;
+
+/idefeffect \
+    -n"Elemental shield of water" \
+    -s"ESoW" \
+    -u"^Your skin gets a blue hue as a layer of elemental energy spreads over it." \
+    -d"^The hue of blue disappears from your skin as the layer of energy disperses."
+
+
+;;;
 ;;; Unknown guild
 ;;;
 
