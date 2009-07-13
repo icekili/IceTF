@@ -258,10 +258,11 @@
     -u"^As [A-Z][a-z]+ finishes the chant, shadows jump from the darkness forming a barrier around you!" \
     -d"^The shadow barrier around you fades into nothingness."
 
-
-;; FIXME: Unfold mind
-;; UP:
-;;   You feel Ilmaree's presence inside your mind, while he unfolds the unused parts of your mind and opens the untapped resources for your use.
+/idefeffect \
+    -n"Unfold mind" \
+    -s"UM" \
+    -u"^You feel [A-Z][a-z]+'s presence inside your mind, while he unfolds the unused parts of your mind and opens the untapped resources for your use." \
+    -d"^Your mind feels limited again."
 
 
 ;;;
