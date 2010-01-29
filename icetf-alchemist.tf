@@ -1,6 +1,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; IceTF - Alchemist module. (c) Kili @Icesus, 2009.
+;; IceTF - Alchemist module. (c) Kili @Icesus, 2009, 2010.
 ;;
 ;; Module for alchemist highlights, etc.
 ;;
@@ -18,3 +18,6 @@
 
 ;; Create powder ready
 /def -F -aCgreen -mregexp -t"After mixing and working for a while with the ingredients you manage to create [a-z ]+." ipowder_done
+
+;; Create incense ready
+/def -F -aCgreen -mregexp -t"You gather several suitable leaves and sprinkle the powder on (it|them) and roll" iincense_done
