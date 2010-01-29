@@ -1,6 +1,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; IceTF - Main module. (c) Kili @Icesus, 2009.
+;; IceTF - Main module. (c) Kili @Icesus, 2009, 2010.
 ;;
 ;; Module for common stuff, tracking things, etc.
 ;;
@@ -34,6 +34,14 @@
 ;; Casting a spell. 0=no, 1=yes
 /set istatus_casting 0
 
+;; Poisoned. 0=no, 1=yes
+/set istatus_poison 0
+
+;; Wounded. 0=no, 1=yes
+/set istatus_wound 0
+
+;; Rite of Success. 0=no, 1=yes
+/set istatus_riteofsuccess 0
 
 ;;;
 ;;; Triggers for different statuses
@@ -117,7 +125,13 @@
 /def -F -t"You start concentrating on a spell." icasting_on = \
     /set istatus_casting=1
 
+/def -F -t"You abort your spellcasting ritual to start a new one." icasting_new = \
+    /set istatus_casting=1
+
 /def -F -t"You are not concentrating on anything at this moment." icasting_nothing = \
+    /set istatus_casting=0
+
+/def -F -t"You don't have enough spell points to complete the spell!" icasting_nosp = \
     /set istatus_casting=0
 
 ;; Casting done
@@ -130,3 +144,13 @@
 
 /def -F -t"You lost your concentration on your spell!" icasting_off3 = \
     /set istatus_casting=0
+
+
+; Rite of Success
+/def -F -t"You succeed in clearing your mind of worldly concerns." iroteofsuccess_on = \
+     /set istatus_riteofsuccess=1
+
+/def -F -t"You feel like a strange force is helping you to cast the spell." iriteofsuccess_off = \
+     /set istatus_riteofsuccess=0
+
+/def -F -t"You fail in clearing your mind of worldly concerns." iriteofsuccess_fail
