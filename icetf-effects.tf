@@ -102,6 +102,13 @@
     -u"^The essence of Pthuule fills your spirit and you feel gifted by the elements." \
     -d"^You feel a loss as gift of elements ceases to affect you."
 
+/idefeffect \
+    -n"Gift of elements" \
+    -s"GoE" \
+    -i"earth" \
+    -u"^The essence of Dhubr fills your spirit and you feel gifted by the elements." \
+    -d"^You feel a loss as gift of elements ceases to affect you."
+
 
 ;;;
 ;;; Sorcerer
