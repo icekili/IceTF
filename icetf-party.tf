@@ -36,5 +36,5 @@
      /set istatus_party=0
 
 ;; We are already in party and someone tries to invite to another party
-/def -F -aCgreen -mregexp -t"^[A-Z][a-z]+ invites you to a party but you are already in one." iparty_already \
+/def -F -aCgreen -mregexp -t"^[A-Z][a-z]+ invites you to a party but you are already in one." iparty_already = \
      /set istatus_party=1
