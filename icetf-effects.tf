@@ -250,6 +250,24 @@
 
 
 ;;;
+;;; Priests of Fire
+;;;
+
+/idefeffect \
+    -n"Flagellation" \
+    -s"flgn" \
+    -u"^You feel fervent in your devotion." \
+    -d"^Effects of your flagellation wear out." \
+
+/idefeffect \
+    -n"Martyrdom" \
+    -s"Mrtdm" \
+    -u"^Your faith is your armor and no mortal danger can steer you away from your righteous path." \
+    -d"^You feel the effects of your martyrdom wane." \
+    -r"^You feel your faith strenghten."
+
+
+;;;
 ;;; Unknown guild
 ;;;
 
