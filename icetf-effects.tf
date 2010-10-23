@@ -1,6 +1,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; IceTF - Special Effects module. (c) Kili @Icesus, 2009.
+;; IceTF - Special Effects module. (c) Kili @Icesus, 2009, 2010.
 ;;
 ;; Module for tracking special effects for current player. This module
 ;; should contain everything which can be seen with "score -e" command.
