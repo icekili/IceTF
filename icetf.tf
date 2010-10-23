@@ -64,6 +64,9 @@
 /def -F -t"You aren't tired enough." isleep_not_tired = \
     /set istatus_sleep=0
 
+/def -F -t"You are too busy to sleep." isleep_too_busy = \
+    /set istatus_sleep=0
+
 
 ;; Meditation UP
 /def -F -t"You start to clear your mind from doubts and thoughts, and begin meditating." imeditation_on = \
